@@ -31,15 +31,19 @@ namespace rtcreditcard.Controllers
             .Append("txn001")
             .Append("50.00");
             byte[] b = Encoding.UTF8.GetBytes(sb.ToString().ToCharArray());
-            SHA512 x = SHA512.Create();
+            SHA512Managed x = new SHA512Managed();
             byte[] r = x.ComputeHash(b);
-            string k = "";
+            byte[] hash = x.Hash;
+            x.Dispose();
 
-            foreach (byte v in r)
+            sb.Clear();
+
+            foreach (byte v in hash)
             {
-                k += string.Format("{0:x2}", v);
+                sb.Append(v.ToString("x2"));
             }
 
+            string k = sb.ToString();
             return k;
         }
     }
