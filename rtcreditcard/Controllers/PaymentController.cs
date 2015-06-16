@@ -29,7 +29,7 @@ namespace rtcreditcard.Controllers
             StringBuilder sb = new StringBuilder("M>)\"&nR7")
             .Append("02700701127375000697")
             .Append("txn001")
-            .Append("1.00");
+            .Append("50.00");
             byte[] b = Encoding.UTF8.GetBytes(sb.ToString().ToCharArray());
             SHA512 x = SHA512.Create();
             byte[] r = x.ComputeHash(b);
