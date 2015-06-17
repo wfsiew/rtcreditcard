@@ -16,8 +16,9 @@ namespace rtcreditcard.Controllers
         public ActionResult Index()
         {
             string g = Guid.NewGuid().ToString();
-            ViewBag.TXNID = "TXNRT-" + g;
-            ViewBag.Sign = GetHash(g);
+            string signature = "TXNRT-" + g;
+            ViewBag.TXNID = signature;
+            ViewBag.Sign = GetHash(signature);
             return View();
         }
 
