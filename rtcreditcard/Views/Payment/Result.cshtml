@@ -4,3 +4,8 @@
 }
 
 <h2>Payment Result</h2>
+
+@foreach (var k in ViewBag.Dic)
+{
+    <div>@k.Key : @k.Value</div>
+}
