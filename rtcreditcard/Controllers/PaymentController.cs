@@ -31,6 +31,8 @@ namespace rtcreditcard.Controllers
                 d[k] = Request.Form[k];
             }
 
+            string h = GetHash2(d["MERCHANT_TRANID"], d["TRANSACTION_ID"]);
+
             ViewBag.Dic = d;
             return View();
         }
@@ -41,6 +43,30 @@ namespace rtcreditcard.Controllers
             .Append("02700701127375000697")
             .Append(txnid)
             .Append("500.65");
+            byte[] b = Encoding.UTF8.GetBytes(sb.ToString().ToCharArray());
+            SHA512Managed x = new SHA512Managed();
+            byte[] r = x.ComputeHash(b);
+            byte[] hash = x.Hash;
+            x.Dispose();
+
+            sb.Clear();
+
+            foreach (byte v in hash)
+            {
+                sb.Append(v.ToString("x2"));
+            }
+
+            string k = sb.ToString();
+            return k;
+        }
+
+        private string GetHash2(string txnid, string tid)
+        {
+            StringBuilder sb = new StringBuilder("M>)\"&nR7")
+            .Append("02700701127375000697")
+            .Append(txnid)
+            .Append("500.65")
+            .Append(tid);
             byte[] b = Encoding.UTF8.GetBytes(sb.ToString().ToCharArray());
             SHA512Managed x = new SHA512Managed();
             byte[] r = x.ComputeHash(b);
