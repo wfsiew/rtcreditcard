@@ -4,11 +4,18 @@
 
 <h2>Index</h2>
 
-<form name="form" action="https://ebpgcards.maybank.com/BPG/admin/payment/PaymentWindowSimulator.jsp">
+<form name="form" action="https://ebpgcards.maybank.com/BPG/admin/payment/PaymentInterfaceSimulator.jsp">
     <input name="MERCHANT_ACC_NO" value="02700701127375000697" type="text" />
     <input name="MERCHANT_TRANID" value="@ViewBag.TXNID" type="text" />
     <input name="AMOUNT" value="500.65" type="text" />
     <input name="TRANSACTION_TYPE" value="3" type="text" />
+    <input name="CARD_NO" value="4012001038443335" type="text" />
+    <input name="CARD_EXP_MM" value="11" type="text" />
+    <input name="CARD_EXP_YY" value="20" type="text" />
+    <input name="CARD_CVC" value="123" type="text" />
+    <input name="CARD_ISSUER_BANK_COUNTRY_CODE" value="MY" type="text" />
+    <input name="CARD_HOLDER_NAME" value="test" type="text" />
+    <input name="CARD_TYPE" value="V" type="text" />
     <input name="TXN_SIGNATURE" value="@ViewBag.Sign" type="text" />
     <input name="RESPONSE_TYPE" value="HTTP" type="text" />
     <input name="RETURN_URL" value="https://rtcreditcard.apphb.com/Payment/Result" type="text" />
