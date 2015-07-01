@@ -17,7 +17,7 @@ namespace rtcreditcard.Controllers
         {
             string g = Guid.NewGuid().ToString();
             string signature = "TXNRT-" + g;
-            ViewBag.TXNID = signature;
+            ViewBag.TXNID = signature.Substring(0, 20);
             ViewBag.Sign = GetHash(signature);
             return View();
         }
