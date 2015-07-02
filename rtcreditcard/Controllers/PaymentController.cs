@@ -16,8 +16,8 @@ namespace rtcreditcard.Controllers
         public ActionResult Index()
         {
             string g = Guid.NewGuid().ToString();
-            string signature = "TXNRT-" + g;
-            ViewBag.TXNID = signature.Substring(0, 20);
+            string signature = g;
+            ViewBag.TXNID = signature;
             ViewBag.Sign = GetHash(signature);
             return View();
         }
@@ -42,7 +42,11 @@ namespace rtcreditcard.Controllers
             StringBuilder sb = new StringBuilder("M>)\"&nR7")
             .Append("02700701127375000697")
             .Append(txnid)
-            .Append("500.65");
+            .Append("500.65")
+            .Append(GetMaskedPAN("4012001038443335"))
+            .Append("11")
+            .Append("20")
+            .Append(GetMaskedCVC("123"));
             byte[] b = Encoding.UTF8.GetBytes(sb.ToString().ToCharArray());
             SHA512Managed x = new SHA512Managed();
             byte[] r = x.ComputeHash(b);
@@ -81,6 +85,22 @@ namespace rtcreditcard.Controllers
             }
 
             string k = sb.ToString();
+            return k;
+        }
+
+        private string GetMaskedPAN(string s)
+        {
+            string r = s.Substring(0, 6);
+            string l = s.Substring(12, 4);
+
+            string k = r + "xxxxxx" + l;
+            return k;
+        }
+
+        private string GetMaskedCVC(string s)
+        {
+            string r = s.Substring(2, 1);
+            string k = "xx" + r;
             return k;
         }
     }
